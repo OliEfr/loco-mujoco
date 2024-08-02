@@ -22,8 +22,10 @@ class GymnasiumWrapper(Env):
         ]
     }
 
-    def __init__(self, env_name, render_mode=None, **kwargs):
+    def __init__(self, env_name, render_mode=None, latent_action_space_dim=False, **kwargs):
         self.spec = EnvSpec(env_name)
+
+        self.latent_action_space_dim = latent_action_space_dim
 
         key_render_mode = "render_modes"
         assert "headless" not in kwargs.keys(), f"headless parameter is not allowed in Gymnasium environment. " \
@@ -45,7 +47,8 @@ class GymnasiumWrapper(Env):
         self._env = LocoEnv.make(env_name, **kwargs)
 
         self.observation_space = self._convert_space(self._env.info.observation_space)
-        self.action_space = self._convert_space(self._env.info.action_space)
+        self._set_action_space()
+        # self.action_space = self._convert_space(self._env.info.action_space)
 
     def step(self, action):
         """
@@ -160,3 +163,14 @@ class GymnasiumWrapper(Env):
         high = np.max(space.high)
         shape = space.shape
         return Box(low, high, shape, np.float64)
+    
+    def _set_action_space(self):
+        if self.latent_action_space_dim:
+            bounds = np.full((self.latent_action_space_dim, 2), [-1.0, 1.0]).astype(
+                np.float32
+            )
+            low, high = bounds.T
+            self.action_space = Box(low=low, high=high, dtype=np.float32)
+        else:
+            self.action_space = self._convert_space(self._env.info.action_space)
+        return self.action_space
