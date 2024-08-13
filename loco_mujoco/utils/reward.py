@@ -99,11 +99,12 @@ class MultiTargetVelocityReward(RewardInterface):
 
 class VelocityVectorReward(RewardInterface):
 
-    def __init__(self, x_vel_idx, y_vel_idx, angle_idx, goal_vel_idx):
+    def __init__(self, x_vel_idx, y_vel_idx, angle_idx, goal_vel_idx, target_speed_scale=1.0):
         self._x_vel_idx = x_vel_idx
         self._y_vel_idx = y_vel_idx
         self._angle_idx = angle_idx
         self._goal_vel_idx = goal_vel_idx
+        self.target_speed_scale = target_speed_scale
 
     def __call__(self, state, action, next_state, absorbing):
 
@@ -112,6 +113,6 @@ class VelocityVectorReward(RewardInterface):
 
         # get desired velocity vector in x-y-plane
         cos_sine = state[self._angle_idx]
-        des_vel = state[self._goal_vel_idx] * cos_sine
-
+        des_vel = self.target_speed_scale * state[self._goal_vel_idx] * cos_sine
+        
         return np.exp(-5.0*np.linalg.norm(curr_velocity_xy - des_vel))

@@ -194,7 +194,7 @@ class UnitreeA1(LocoEnv):
                                      data_types=["real", "perfect"])
 
     def __init__(self, action_mode="torque", setup_random_rot=False,
-                 default_target_velocity=0.5, camera_params=None, **kwargs):
+                 default_target_velocity=0.5, camera_params=None, target_speed_scale= 1.0, **kwargs):
         """
         Constructor.
 
@@ -235,6 +235,8 @@ class UnitreeA1(LocoEnv):
         # setup goal including the desired direction and velocity
         self._goal = GoalDirectionVelocity()
         self._goal.set_goal(0.0, default_target_velocity)
+
+        self.target_speed_scale = target_speed_scale
 
         if camera_params is None:
             # make the camera by default a bit higher
@@ -494,7 +496,8 @@ class UnitreeA1(LocoEnv):
             angle_idx = [-3, -2]
             goal_vel_idx = [-1]
             goal_reward_func = VelocityVectorReward(x_vel_idx=x_vel_idx, y_vel_idx=y_vel_idx,
-                                                    angle_idx=angle_idx, goal_vel_idx=goal_vel_idx)
+                                                    angle_idx=angle_idx, goal_vel_idx=goal_vel_idx,
+                                                    target_speed_scale=self.target_speed_scale)
         else:
             goal_reward_func = super()._get_reward_function(reward_type, reward_params)
 
