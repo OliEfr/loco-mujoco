@@ -32,7 +32,7 @@ class LocoEnv(MultiMuJoCo):
                  n_substeps=10,  reward_type=None, reward_params=None, traj_params=None, random_start=True,
                  init_step_no=None, timestep=0.001, use_foot_forces=False, default_camera_mode="follow",
                  use_absorbing_states=True, domain_randomization_config=None, parallel_dom_rand=True,
-                 N_worker_per_xml_dom_rand=4, **viewer_params):
+                 N_worker_per_xml_dom_rand=4, custom_init_states = None, **viewer_params):
         """
         Constructor.
 
@@ -139,6 +139,7 @@ class LocoEnv(MultiMuJoCo):
 
         self._random_start = random_start
         self._init_step_no = init_step_no
+        self.custom_init_states = custom_init_states
 
         self._use_absorbing_states = use_absorbing_states
 
@@ -176,6 +177,13 @@ class LocoEnv(MultiMuJoCo):
         return self._reward_function(state, action, next_state, absorbing)
 
     def reset(self, obs=None):
+
+        # @OLIVER OLI
+        # TODO sampling init state from provided numpy array
+        if self.custom_init_states is not None:
+            idx = np.random.randint(0, self.custom_init_states.shape[0])
+            obs = self.custom_init_states[idx]
+            obs = self.custom_init_states[1]
 
         mujoco.mj_resetData(self._model, self._data)
         self.mean_grf.reset()
