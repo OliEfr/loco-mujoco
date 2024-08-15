@@ -179,11 +179,9 @@ class LocoEnv(MultiMuJoCo):
     def reset(self, obs=None):
 
         # @OLIVER OLI
-        # TODO sampling init state from provided numpy array
         if self.custom_init_states is not None:
             idx = np.random.randint(0, self.custom_init_states.shape[0])
             obs = self.custom_init_states[idx]
-            obs = self.custom_init_states[1]
 
         mujoco.mj_resetData(self._model, self._data)
         self.mean_grf.reset()
