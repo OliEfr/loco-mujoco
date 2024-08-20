@@ -19,7 +19,8 @@ class GymnasiumWrapper(Env):
         "render_modes": [
             "human",
             "rgb_array",
-        ]
+        ],
+        "render_fps": 100
     }
 
     def __init__(self, env_name, render_mode=None, latent_action_space_dim=False, **kwargs):

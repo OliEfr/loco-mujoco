@@ -32,7 +32,7 @@ class LocoEnv(MultiMuJoCo):
                  n_substeps=10,  reward_type=None, reward_params=None, traj_params=None, random_start=True,
                  init_step_no=None, timestep=0.001, use_foot_forces=False, default_camera_mode="follow",
                  use_absorbing_states=True, domain_randomization_config=None, parallel_dom_rand=True,
-                 N_worker_per_xml_dom_rand=4, custom_init_states = None, **viewer_params):
+                 N_worker_per_xml_dom_rand=4, expert_init_states = None, expert_term_states = None, **viewer_params):
         """
         Constructor.
 
@@ -139,7 +139,12 @@ class LocoEnv(MultiMuJoCo):
 
         self._random_start = random_start
         self._init_step_no = init_step_no
-        self.custom_init_states = custom_init_states
+        self.expert_init_states = expert_init_states
+        self.expert_term_states = expert_term_states
+        if self.expert_term_states is not None:
+            if "UnitreeA1" in str(type(self)):
+                # remove two last states as they are not related to movement
+                self.expert_term_states = self.expert_term_states[:, :-3]
 
         self._use_absorbing_states = use_absorbing_states
 
@@ -179,9 +184,9 @@ class LocoEnv(MultiMuJoCo):
     def reset(self, obs=None):
 
         # @OLIVER OLI
-        if self.custom_init_states is not None:
-            idx = np.random.randint(0, self.custom_init_states.shape[0])
-            obs = self.custom_init_states[idx]
+        if self.expert_init_states is not None:
+            idx = np.random.randint(0, self.expert_init_states.shape[0])
+            obs = self.expert_init_states[idx]
 
         mujoco.mj_resetData(self._model, self._data)
         self.mean_grf.reset()
@@ -233,7 +238,7 @@ class LocoEnv(MultiMuJoCo):
             if self.trajectories is not None:
                 if self._random_start:
                     sample = self.trajectories.reset_trajectory()
-                elif self._init_step_no:
+                elif self._init_step_no is not None:
                     traj_len = self.trajectories.trajectory_length
                     n_traj = self.trajectories.number_of_trajectories
                     assert self._init_step_no <= traj_len * n_traj
