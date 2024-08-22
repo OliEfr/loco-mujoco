@@ -483,7 +483,7 @@
       </body>
     </body>
 
-    <body name="trunk___4" pos="0 2 0.43" childclass="a1">
+    <body name="trunk___4" pos="0 3 0.43" childclass="a1">
       <light name="spotlight___4" mode="trackcom" pos="0 -0.25 2"/>
       <joint name="trunk_tx___4" type="slide" pos="0 0 0" axis="       1        0        0" limited="false" range="-500        500" ref="0" armature="0" damping="0" stiffness="0"></joint>
       <joint name="trunk_ty___4" type="slide" pos="0 0 0" axis="       0        1        0" limited="false" range="-500        500" ref="0" armature="0" damping="0" stiffness="0"></joint>
@@ -619,7 +619,7 @@
       </body>
     </body>
 
-    <body name="trunk___5" pos="0 2 0.43" childclass="a1">
+    <body name="trunk___5" pos="0 4 0.43" childclass="a1">
       <light name="spotlight___5" mode="trackcom" pos="0 -0.25 2"/>
       <joint name="trunk_tx___5" type="slide" pos="0 0 0" axis="       1        0        0" limited="false" range="-500        500" ref="0" armature="0" damping="0" stiffness="0"></joint>
       <joint name="trunk_ty___5" type="slide" pos="0 0 0" axis="       0        1        0" limited="false" range="-500        500" ref="0" armature="0" damping="0" stiffness="0"></joint>
@@ -755,7 +755,7 @@
       </body>
     </body>
 
-    <body name="trunk___6" pos="0 2 0.43" childclass="a1">
+    <body name="trunk___6" pos="0 5 0.43" childclass="a1">
       <light name="spotlight___6" mode="trackcom" pos="0 -0.25 2"/>
       <joint name="trunk_tx___6" type="slide" pos="0 0 0" axis="       1        0        0" limited="false" range="-500        500" ref="0" armature="0" damping="0" stiffness="0"></joint>
       <joint name="trunk_ty___6" type="slide" pos="0 0 0" axis="       0        1        0" limited="false" range="-500        500" ref="0" armature="0" damping="0" stiffness="0"></joint>
@@ -892,7 +892,7 @@
     </body>
 
 
-    <body name="trunk___7" pos="0 2 0.43" childclass="a1">
+    <body name="trunk___7" pos="0 6 0.43" childclass="a1">
       <light name="spotlight___7" mode="trackcom" pos="0 -0.25 2"/>
       <joint name="trunk_tx___7" type="slide" pos="0 0 0" axis="       1        0        0" limited="false" range="-500        500" ref="0" armature="0" damping="0" stiffness="0"></joint>
       <joint name="trunk_ty___7" type="slide" pos="0 0 0" axis="       0        1        0" limited="false" range="-500        500" ref="0" armature="0" damping="0" stiffness="0"></joint>
