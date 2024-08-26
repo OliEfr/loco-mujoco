@@ -2,7 +2,6 @@
   <compiler angle="radian" meshdir="assets" texturedir="assets" autolimits="true" />
 
   <option cone="elliptic" impratio="100" timestep="0.001" integrator="RK4"/> <!-- timestep from loco-mujoo-->
-
   <default>
     <motor ctrllimited="true" ctrlrange="-1.0 1.0" />
     <default class="a1">
@@ -92,9 +91,9 @@
           <camera name="track___1" mode="trackcom" pos="0 -3 1" xyaxes="1 0 0 0 0.3 1" />
           <inertial mass="4.713" pos="0 0.0041 -0.0005"
             fullinertia="0.0158533 0.0377999 0.0456542 -3.66e-05 -6.11e-05 -2.75e-05" />
-          <joint class="connector_joint" name="trunk_list___1" type="hinge" pos="0 0 .1" axis="       1        0        0" limited="false" range=" -3.141592654   3.141592654" ref="0" armature="0" damping="0" stiffness="0"></joint>
-          <joint class="connector_joint" name="trunk_tilt___1" type="hinge" pos="0 0 .1" axis="       0        1        0" limited="false" range=" -3.141592654   3.141592654" ref="0" armature="0" damping="0" stiffness="0"></joint>
-          <joint class="connector_joint" name="trunk_rotation___1" type="hinge" pos="0 0 .1" axis="       0        0        1" limited="false" range=" -3.141592654   3.141592654" ref="0" armature="0" damping="0" stiffness="0"></joint>
+          <joint class="connector_joint" name="trunk_list___1" type="hinge" pos="0 0 .1" axis="       1        0        0" limited="false" range=" -3.141592654   3.141592654" armature=".01" damping=".01" stiffness="0"></joint>
+          <joint class="connector_joint" name="trunk_tilt___1" type="hinge" pos="0 0 .1" axis="       0        1        0" limited="false" range=" -3.141592654   3.141592654" armature=".01" damping=".01" stiffness="0"></joint>
+          <joint class="connector_joint" name="trunk_rotation___1" type="hinge" pos="0 0 .1" axis="       0        0        1" limited="false" range=" -3.141592654   3.141592654" armature=".01" damping=".01" stiffness="0"></joint>
 
 
           <geom class="visual" mesh="trunk" material="carbonfibre" />
@@ -227,9 +226,9 @@
           <light name="spotlight___2" mode="trackcom" pos="0 -0.25 2" />
           <inertial mass="4.713" pos="0 0.0041 -0.0005"
             fullinertia="0.0158533 0.0377999 0.0456542 -3.66e-05 -6.11e-05 -2.75e-05" />
-          <joint class="connector_joint" name="trunk_list___2 " type="hinge" pos="0 0 .1" axis="       1        0        0" limited="false" range=" -3.141592654   3.141592654" ref="0" armature="0" damping="0" stiffness="0"></joint>
-          <joint class="connector_joint" name="trunk_tilt___2 " type="hinge" pos="0 0 .1" axis="       0        1        0" limited="false" range=" -3.141592654   3.141592654" ref="0" armature="0" damping="0" stiffness="0"></joint>
-          <joint class="connector_joint" name="trunk_rotation___2 " type="hinge" pos="0 0 .1" axis="       0        0        1" limited="false" range=" -3.141592654   3.141592654" ref="0" armature="0" damping="0" stiffness="0"></joint>
+          <joint class="connector_joint" name="trunk_list___2 " type="hinge" pos="0 0 .1" axis="       1        0        0" limited="false" range=" -3.141592654   3.141592654" armature=".01" damping=".01" stiffness="0"></joint>
+          <joint class="connector_joint" name="trunk_tilt___2 " type="hinge" pos="0 0 .1" axis="       0        1        0" limited="false" range=" -3.141592654   3.141592654" armature=".01" damping=".01" stiffness="0"></joint>
+          <joint class="connector_joint" name="trunk_rotation___2 " type="hinge" pos="0 0 .1" axis="       0        0        1" limited="false" range=" -3.141592654   3.141592654" armature=".01" damping=".01" stiffness="0"></joint>
 
 
           <geom class="visual" mesh="trunk" material="carbonfibre" />
