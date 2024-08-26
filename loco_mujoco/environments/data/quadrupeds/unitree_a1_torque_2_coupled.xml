@@ -86,7 +86,7 @@
       <geom class="visual" name="connector_vis" type="capsule" material="carbonfibre" size=".03 .5" mass=".01"
          euler="1.57079632679 0 0" pos="0 0 0"/>
       <geom class="collision" name="connector" type="capsule" size=".03 .5" mass=".01"
-         euler="1.57079632679 0 0" pos="0 0 0"/>
+         euler="1.57079632679 0 0" pos="0 0 0"/> <!-- disabling collision for connector helps nan, inf, huge value problem: conaffinity="2" contype="2"-->
         <body name="trunk___1" pos="0 -.5 -.1" childclass="a1">
           <light name="spotlight___1" mode="trackcom" pos="0 -0.25 2" />
           <camera name="track___1" mode="trackcom" pos="0 -3 1" xyaxes="1 0 0 0 0.3 1" />
