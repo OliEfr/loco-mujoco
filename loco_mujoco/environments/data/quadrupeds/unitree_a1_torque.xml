@@ -1,7 +1,7 @@
 <mujoco model="a1">
   <compiler angle="radian" meshdir="assets" texturedir="assets" autolimits="true"/>
 
-  <option cone="elliptic" impratio="100"/>
+  <option cone="elliptic" impratio="100" timestep="0.001"/>
 
   <default>
     <motor ctrllimited="true" ctrlrange="-1.0 1.0"/>
