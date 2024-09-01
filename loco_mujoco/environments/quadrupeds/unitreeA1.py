@@ -207,6 +207,9 @@ class UnitreeA1(LocoEnv):
 
         """
 
+        self.use_expert_data = False # required to enable replay this env without expert data
+        assert self.use_expert_data == False, "Not supported for now."
+
         # Choose xml file (either for torque or position control)
         if action_mode == "torque":
             xml_path = (Path(__file__).resolve().parent.parent / "data" / "quadrupeds" /

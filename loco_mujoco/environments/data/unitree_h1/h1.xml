@@ -123,6 +123,7 @@ Modified by Firas Al-Hafez 2023.
                 <joint name="ankle_angle_l" axis="0 1 0" range="-0.87 0.52"/>
                 <geom class="visual" mesh="left_ankle_link"/>
                 <geom name="left_foot" class="collision" mesh="left_ankle_link"/>
+                <site name="left_foot" type="sphere" size="0.01"  rgba="1 0 0 1" pos="0.05 0 -0.055"/>
               </body>
             </body>
           </body>
@@ -158,6 +159,7 @@ Modified by Firas Al-Hafez 2023.
                 <joint name="ankle_angle_r" axis="0 1 0" range="-0.87 0.52"/>
                 <geom class="visual" mesh="right_ankle_link"/>
                 <geom name="right_foot" class="collision" mesh="right_ankle_link"/>
+                <site name="right_foot" type="sphere" size="0.01"  rgba="1 0 0 1" pos="0.05 0 -0.055"/>
               </body>
             </body>
           </body>
