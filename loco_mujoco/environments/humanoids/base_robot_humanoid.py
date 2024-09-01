@@ -100,6 +100,9 @@ class BaseRobotHumanoid(LocoEnv):
         if self._hold_weight:
             low = np.concatenate([low, [self._valid_weights[0]]])
             high = np.concatenate([high, [self._valid_weights[-1]]])
+        if self.use_expert_data:
+            low = np.concatenate([low, [-np.inf]])
+            high = np.concatenate([high, [np.inf]])
 
         return low, high
 
@@ -121,6 +124,8 @@ class BaseRobotHumanoid(LocoEnv):
             weight_mass = deepcopy(self._model.body("weight").mass)
             obs = np.concatenate([obs, weight_mass])
 
+        if self.use_expert_data:
+            obs = np.concatenate((obs, np.array([self.phase])))
         return obs
 
     def _get_box_color(self, ind):

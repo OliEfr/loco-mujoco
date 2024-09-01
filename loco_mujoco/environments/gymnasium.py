@@ -23,10 +23,18 @@ class GymnasiumWrapper(Env):
         "render_fps": 100
     }
 
-    def __init__(self, env_name, render_mode=None, latent_action_space_dim=False, **kwargs):
+    def __init__(self, env_name, render_mode=None, latent_action_space_dim=False, use_expert_data=False, **kwargs):
         self.spec = EnvSpec(env_name)
 
         self.latent_action_space_dim = latent_action_space_dim
+
+        assert env_name == "UnitreeH1.walk", "Only UnitreeH1.walk is supported for now."
+
+        self.use_expert_data = use_expert_data
+        if self.use_expert_data:
+            expert_data = np.load("recorded_experts/loco_mujoco/loco_mujoco_h1.walk_latent_6_nonLin/UnitreeH1.walk.perfect.npy", allow_pickle=True).item()
+            self.expert_obs_cycle = expert_data["recorded_obs_cycle"].copy()
+            self.phase = 0
 
         key_render_mode = "render_modes"
         assert "headless" not in kwargs.keys(), f"headless parameter is not allowed in Gymnasium environment. " \
@@ -45,11 +53,21 @@ class GymnasiumWrapper(Env):
         else:
             kwargs["headless"] = True
 
-        self._env = LocoEnv.make(env_name, **kwargs)
+        self._env = LocoEnv.make(env_name, use_expert_data = self.use_expert_data, **kwargs)
+        if self.use_expert_data:
+            self._env.phase = self.phase
 
         self.observation_space = self._convert_space(self._env.info.observation_space)
         self._set_action_space()
         # self.action_space = self._convert_space(self._env.info.action_space)
+
+        
+    def imitating_joint_pos_reward(self):
+        joint_pos = self._env._data.qpos[2:].copy()
+        joint_pos_ref = self.expert_obs_cycle[self.phase][
+            :15
+        ]
+        return np.exp(-0.5 * np.linalg.norm(joint_pos_ref - joint_pos))
 
     def step(self, action):
         """
@@ -68,6 +86,19 @@ class GymnasiumWrapper(Env):
         """
 
         obs, reward, absorbing, info = self._env.step(action)
+        if self.use_expert_data:
+            self.phase += 1
+            self.phase = self.phase % len(self.expert_obs_cycle)
+            self._env.phase = self.phase
+
+            style_reward = self.imitating_joint_pos_reward()
+            task_reward = reward
+            reward = 0.33 * style_reward + 0.67 * task_reward
+            info["style_reward"] = style_reward
+            info["joint_pos_reward"] = style_reward
+        else:
+            task_reward = reward
+        info["task_reward"] = task_reward
 
         return obs, reward, absorbing, False, info
 
@@ -76,6 +107,10 @@ class GymnasiumWrapper(Env):
         Resets the state of the environment, returning an initial observation and info.
 
         """
+        if self.use_expert_data:
+            self.phase=0
+            self._env.phase = self.phase
+
 
         # Initialize the RNG if the seed is manually passed
         if seed is not None:

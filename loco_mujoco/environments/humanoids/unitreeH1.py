@@ -233,11 +233,13 @@ class UnitreeH1(BaseRobotHumanoid):
                                      non_combinable=[("carry", None, "perfect")])
 
     def __init__(self, disable_arms=True, disable_back_joint=False, hold_weight=False,
-                 weight_mass=None, **kwargs):
+                 weight_mass=None, use_expert_data=False, **kwargs):
         """
         Constructor.
 
         """
+
+        self.use_expert_data = use_expert_data
 
         if hold_weight:
             assert disable_arms is True, "If you want Unitree H1 to carry a weight, please disable the arms. " \
