@@ -512,6 +512,9 @@
       <geom name="connector_target" type="cylinder" size=".03 .55" mass=".1" 
         euler="1.57079632679 0 0" rgba="1.0 0 0 .2" />
     </body-->
+    <body name="target" pos="1.5 0.5 0"> 
+      <geom name="target" type="sphere" size=".1" rgba="1.0 0 0 .2" />
+    </body>
 
 
   </worldbody>
