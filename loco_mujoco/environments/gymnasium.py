@@ -26,7 +26,7 @@ class GymnasiumWrapper(Env):
 
         self.use_expert_data = use_expert_data
         if self.use_expert_data:
-            expert_data = np.load("recorded_experts/loco_mujoco/loco_mujoco_h1.walk_latent_6_nonLin/UnitreeH1.walk.perfect.npy", allow_pickle=True).item()
+            expert_data = np.load("expert_demonstrations/Unitree_A1_H1/UnitreeH1.walk.perfect.npy", allow_pickle=True).item()
             self.expert_obs_cycle = expert_data["recorded_obs_cycle"].copy()
             self.phase = 0
 
