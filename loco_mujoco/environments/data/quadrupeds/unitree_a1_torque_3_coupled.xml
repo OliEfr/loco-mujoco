@@ -614,6 +614,9 @@
     <pair geom1="collision_trunk___3_7" geom2="connector_2_3"/>
     <pair geom1="collision_trunk___3_8" geom2="connector_2_3"/>
 
+    <!--exclude name="1_2" body1="trunk___1" body2="trunk___2"/>
+    <exclude name="1_3" body1="trunk___1" body2="trunk___3"/>
+    <exclude name="2_3" body1="trunk___2" body2="trunk___3"/-->
 
   </contact>
 

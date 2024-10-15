@@ -15,25 +15,18 @@ class GymnasiumWrapper(Env):
 
     """
 
-    metadata = {
-        "render_modes": [
-            "human",
-            "rgb_array",
-        ],
-        "render_fps": 100
-    }
-
     def __init__(self, env_name, render_mode=None, latent_action_space_dim=False, use_expert_data=False, **kwargs):
         self.spec = EnvSpec(env_name)
+        self.metadata = {"render_modes": ["human", "rgb_array"]}
 
         self.latent_action_space_dim = latent_action_space_dim
 
         if "UnitreeH1" in env_name:
-            assert env_name == "UnitreeH1.walk", "Only UnitreeH1.walk is supported for now."
+            assert env_name == "UnitreeH1.walk.perfect" or env_name == "UnitreeH1.walk", f"Only UnitreeH1.walk is supported for now. Used {env_name} instead."
 
         self.use_expert_data = use_expert_data
         if self.use_expert_data:
-            expert_data = np.load("recorded_experts/loco_mujoco/loco_mujoco_h1.walk_latent_6_nonLin/UnitreeH1.walk.perfect.npy", allow_pickle=True).item()
+            expert_data = np.load("expert_demonstrations/Unitree_A1_H1/UnitreeH1.walk.perfect.npy", allow_pickle=True).item()
             self.expert_obs_cycle = expert_data["recorded_obs_cycle"].copy()
             self.phase = 0
 
@@ -55,6 +48,7 @@ class GymnasiumWrapper(Env):
             kwargs["headless"] = True
 
         self._env = LocoEnv.make(env_name, use_expert_data = self.use_expert_data, **kwargs)
+        self.metadata["render_fps"] = 1.0 / self._env.dt
         if self.use_expert_data:
             self._env.phase = self.phase
 
