@@ -28,7 +28,8 @@ class GymnasiumWrapper(Env):
 
         self.latent_action_space_dim = latent_action_space_dim
 
-        assert env_name == "UnitreeH1.walk", "Only UnitreeH1.walk is supported for now."
+        if "UnitreeH1" in env_name:
+            assert env_name == "UnitreeH1.walk", "Only UnitreeH1.walk is supported for now."
 
         self.use_expert_data = use_expert_data
         if self.use_expert_data:
