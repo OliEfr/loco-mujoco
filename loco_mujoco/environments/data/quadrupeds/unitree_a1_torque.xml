@@ -4,22 +4,21 @@
   <option cone="elliptic" impratio="100" timestep="0.001"/>
 
   <default>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0"/>
+    <motor ctrllimited="true" ctrlrange="-33.5 33.5"/>
     <default class="a1">
       <geom friction="0.6" margin="0.001"/>
       <joint axis="0 1 0" damping="2" armature="0.01" frictionloss="0.2"/>
-      <motor ctrlrange="-33.5 33.5" ctrllimited="true"/>
       <default class="abduction">
         <joint axis="1 0 0" range="-0.802851 0.802851" damping="1"/>
-        <position ctrlrange="-0.802851 0.802851"/>
+        <position ctrlrange="-0.802851 0.802851"/> <!-- scaling 0.9, center 0.0 -->
       </default>
       <default class="hip">
         <joint range="-1.0472 4.18879"/>
-        <position ctrlrange="-1.0472 4.18879"/>
+        <position ctrlrange="-1.0472 4.18879"/>  <!-- scaling 2.6, center 1.6 | modified: center 0.9, scaling 1-->
       </default>
       <default class="knee">
-        <joint range="-2.69653 -0.916298"/>
-        <position ctrlrange="-2.69653 -0.916298"/>
+        <joint range="-2.69653 -0.916298"/> <!-- scaling 0.9, center -1.8 -->
+        <position ctrlrange="-2.69653 -0.916298"/> 
       </default>
       <default class="visual">
         <geom type="mesh" contype="0" conaffinity="0" group="0" material="dark"/>
@@ -213,18 +212,18 @@
   </worldbody>
 
   <actuator>
-    <motor name="FR_hip" gear="34" joint="FR_hip_joint"></motor>
-    <motor name="FR_thigh" gear="34" joint="FR_thigh_joint"></motor>
-    <motor name="FR_calf" gear="34" joint="FR_calf_joint"></motor>
-    <motor name="FL_hip" gear="34" joint="FL_hip_joint"></motor>
-    <motor name="FL_thigh" gear="34" joint="FL_thigh_joint"></motor>
-    <motor name="FL_calf" gear="34" joint="FL_calf_joint"></motor>
-    <motor name="RR_hip" gear="34" joint="RR_hip_joint"></motor>
-    <motor name="RR_thigh" gear="34" joint="RR_thigh_joint"></motor>
-    <motor name="RR_calf" gear="34" joint="RR_calf_joint"></motor>
-    <motor name="RL_hip" gear="34" joint="RL_hip_joint"></motor>
-    <motor name="RL_thigh" gear="34" joint="RL_thigh_joint"></motor>
-    <motor name="RL_calf" gear="34" joint="RL_calf_joint"></motor>
+    <motor name="FR_hip" joint="FR_hip_joint"></motor>
+    <motor name="FR_thigh" joint="FR_thigh_joint"></motor>
+    <motor name="FR_calf" joint="FR_calf_joint"></motor>
+    <motor name="FL_hip" joint="FL_hip_joint"></motor>
+    <motor name="FL_thigh" joint="FL_thigh_joint"></motor>
+    <motor name="FL_calf" joint="FL_calf_joint"></motor>
+    <motor name="RR_hip" joint="RR_hip_joint"></motor>
+    <motor name="RR_thigh" joint="RR_thigh_joint"></motor>
+    <motor name="RR_calf" joint="RR_calf_joint"></motor>
+    <motor name="RL_hip" joint="RL_hip_joint"></motor>
+    <motor name="RL_thigh" joint="RL_thigh_joint"></motor>
+    <motor name="RL_calf" joint="RL_calf_joint"></motor>
   </actuator>
 
 </mujoco>
